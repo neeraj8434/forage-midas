@@ -6,11 +6,11 @@ import jakarta.persistence.*;
 public class UserRecord {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private long id;
 
     @Column(nullable = false)
-    private String name;
+    private String username;
 
     @Column(nullable = false)
     private float balance;
@@ -19,21 +19,16 @@ public class UserRecord {
     }
 
     public UserRecord(String name, float balance) {
-        this.name = name;
+        this.username = name;   // IMPORTANT: map name → username
         this.balance = balance;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("User[id=%d, name='%s', balance='%f'", id, name, balance);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public float getBalance() {
@@ -42,5 +37,13 @@ public class UserRecord {
 
     public void setBalance(float balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "User[id=%d, username='%s', balance='%f']",
+                id, username, balance
+        );
     }
 }
